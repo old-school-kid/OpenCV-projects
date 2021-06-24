@@ -27,6 +27,9 @@ def label_contour_center(image, c):
 image = cv2.imread('images/bunchofshapes.jpg')
 orginal_image = image.copy()
 
+gray=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+edged = cv2.Canny(gray, 50, 200)
+
 contours, _ = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 # Computer Center of Mass or centroids and draw them on our image
 for (i, c) in enumerate(contours):

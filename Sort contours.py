@@ -15,11 +15,15 @@ def get_contour_areas(contours):
 image = cv2.imread('images/bunchofshapes.jpg')
 orginal_image = image
 
+gray=cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+edged = cv2.Canny(gray, 50, 200)
+
+contours, _ = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+
 # Let's print the areas of the contours before sorting
 print ("Contor Areas before sorting")
 print (get_contour_areas(contours))
 
-contours, _ = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
 # Sort contours large to small
 sorted_contours = sorted(contours, key=cv2.contourArea)
 #sorted_contours = sorted(contours, key=cv2.contourArea, reverse=True)[:3]
